@@ -12,6 +12,10 @@ def add_quote(quote, person):
         f.write("\n")
     return True
 
+def sanitize_quote(quote):
+    quote = quote.replace("'", "'\\''")
+    return quote
+
 print("Welcome to my quote collection. Please add your quote!")
 print("")
 quote = input("Quote:")
@@ -20,7 +24,7 @@ tweet = input("Do you want to tweet this? (y/n)")
 
 if add_quote(quote, person):
     if tweet is "Y" or tweet is "y":
-        os.system("echo '\"" + quote + "\"' /" + person + "/ | tweet")
+        os.system("echo '\"" + sanitize_quote(quote) + "\"' /" + person + "/ | tweet")
 
     print("")
     print("Quote added. Thanks for contributing. Cheers, ~frs")
